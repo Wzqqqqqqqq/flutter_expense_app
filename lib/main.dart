@@ -4,7 +4,6 @@ import './widgets/transaction_list.dart';
 import './widgets/new_transacton.dart';
 import './widgets/chart.dart';
 
-
 void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
@@ -25,10 +24,21 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   final List<Transaction> _userTransactions = [
-    // Transaction(
-    //     id: 't1', title: 'new shoes', amount: 49.99, date: DateTime.now()),
-    // Transaction(
-    //     id: 't2', title: 'new cloth', amount: 33.99, date: DateTime.now()),
+    Transaction(
+        id: 't1',
+        title: 'new shoes',
+        amount: 49.99,
+        date: DateTime.now().subtract(Duration(days: 1))),
+    Transaction(
+        id: 't2',
+        title: 'new cloth',
+        amount: 33.99,
+        date: DateTime.now().subtract(Duration(days: 2))),
+    Transaction(
+        id: 't3',
+        title: 'new cloth2',
+        amount: 100.00,
+        date: DateTime.now().subtract(Duration(days: 3))),
   ];
 
   List<Transaction> get _recentTransactions {
@@ -37,11 +47,11 @@ class _MyHomePageState extends State<MyHomePage> {
     }).toList();
   }
 
-  void _addNewTransaction(String txTitle, double txAmount) {
+  void _addNewTransaction(String txTitle, double txAmount, DateTime txDate) {
     final newTx = Transaction(
         title: txTitle,
         amount: txAmount,
-        date: DateTime.now(),
+        date: txDate,
         id: DateTime.now().toIso8601String());
     setState(() {
       _userTransactions.add(newTx);
@@ -77,7 +87,7 @@ class _MyHomePageState extends State<MyHomePage> {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
             Card(
-              color: Colors.blue,
+              color: Colors.white,
               child: Chart(_recentTransactions),
             ),
             TransactionList(_userTransactions),

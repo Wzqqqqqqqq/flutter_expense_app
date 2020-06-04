@@ -18,8 +18,8 @@ class Chart extends StatelessWidget {
           totalsum += recentTransactions[i].amount;
         }
       }
-      return {'day': DateFormat.E().format(weekDay), 'amount': totalsum};
-    });
+      return {'day': DateFormat.Md().format(weekDay), 'amount': totalsum};
+    }).reversed.toList();
   }
 
   double get totalSpending {
@@ -33,11 +33,18 @@ class Chart extends StatelessWidget {
     return Card(
       elevation: 6,
       margin: EdgeInsets.all(20),
-      child: Row(
-        children: groupTransactionValues.map((data) {
-          return ChartBar(data['day'], data['amount'],
-              (data['amount'] as double) / totalSpending);
-        }).toList(),
+      child: Padding(
+        padding: EdgeInsets.all(10),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: groupTransactionValues.map((data) {
+            return Flexible(
+              fit: FlexFit.tight,
+              child: ChartBar(data['day'], data['amount'],
+                  (data['amount'] as double) / totalSpending),
+            );
+          }).toList(),
+        ),
       ),
     );
   }
