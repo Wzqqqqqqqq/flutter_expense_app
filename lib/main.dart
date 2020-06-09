@@ -26,19 +26,14 @@ class _MyHomePageState extends State<MyHomePage> {
   final List<Transaction> _userTransactions = [
     Transaction(
         id: 't1',
-        title: 'new shoes',
-        amount: 49.99,
+        title: 'new pc',
+        amount: 1000,
         date: DateTime.now().subtract(Duration(days: 1))),
     Transaction(
         id: 't2',
-        title: 'new cloth',
-        amount: 33.99,
+        title: 'new keyboard',
+        amount: 120,
         date: DateTime.now().subtract(Duration(days: 2))),
-    Transaction(
-        id: 't3',
-        title: 'new cloth2',
-        amount: 100.00,
-        date: DateTime.now().subtract(Duration(days: 3))),
   ];
 
   List<Transaction> get _recentTransactions {
@@ -55,6 +50,12 @@ class _MyHomePageState extends State<MyHomePage> {
         id: DateTime.now().toIso8601String());
     setState(() {
       _userTransactions.add(newTx);
+    });
+  }
+
+  void _deleteTransaction(String id) {
+    setState(() {
+      _userTransactions.removeWhere((id) => id == id);
     });
   }
 
@@ -90,7 +91,7 @@ class _MyHomePageState extends State<MyHomePage> {
               color: Colors.white,
               child: Chart(_recentTransactions),
             ),
-            TransactionList(_userTransactions),
+            TransactionList(_userTransactions, _deleteTransaction),
           ],
         ),
       ),

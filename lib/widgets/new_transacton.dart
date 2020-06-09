@@ -28,11 +28,11 @@ class _NewTransactionState extends State<NewTransaction> {
 
   void _showDatePicker() {
     showDatePicker(
-            context: context,
-            initialDate: DateTime.now(),
-            firstDate: DateTime(2000),
-            lastDate: DateTime.now())
-        .then((selectDate) {
+      context: context,
+      initialDate: DateTime.now(),
+      firstDate: DateTime(2000),
+      lastDate: DateTime.now(),
+    ).then((selectDate) {
       if (selectDate == null) {
         return;
       }
